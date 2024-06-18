@@ -8,7 +8,7 @@ npm run start
 
 This should install all required dependencies, build both server and gui parts of the app and run them.
 
-### Limitations
+### Remarks
 
 - The types are not used thoroughly in the app, especially in library & built-in functions, but custom functions and variables should be typed.
 - There is a maximum value for the position input as the results of greater inputs are exceeding the max value of a number in javascript.
