@@ -4,7 +4,7 @@ import "./index.css";
 type ResultDto = {
   resultValue?: number;
   error?: string;
-  resultPosition: number;
+  resultPosition?: number;
 };
 
 export default function App() {
@@ -14,12 +14,15 @@ export default function App() {
   async function handleSubmit(e): Promise<void> {
     e.preventDefault();
 
-    const response = await fetch(
-      `http://127.0.0.1:3010/getFibonacciValue?position=${position}`
-    );
-    const responseJson = await response.json();
-
-    setResultDto({ ...responseJson, resultPosition: position });
+    try {
+      const response = await fetch(
+        `http://127.0.0.1:3010/getFibonacciValue?position=${position}`
+      );
+      const responseJson = await response.json();
+      setResultDto({ ...responseJson, resultPosition: position });
+    } catch (error) {
+      setResultDto({ error: error });
+    }
   }
 
   return (
@@ -32,6 +35,7 @@ export default function App() {
           placeholder="position"
           value={position}
           min="0"
+          max="1476"
           onChange={(e) => setPosition(Number(e.target.value))}
         />
         <button className="button-submit">Get Result</button>
@@ -47,17 +51,12 @@ function ResultMessage({ resultDto }: { resultDto: ResultDto | null }) {
     return <></>;
   }
 
-  if (resultDto.error !== undefined) {
-    return (
-      <p className="result-text">{`The operation failed: ${resultDto.error}`}</p>
-    );
-  }
+  const text =
+    resultDto.error !== undefined
+      ? `The operation failed: ${resultDto.error}`
+      : resultDto.resultValue !== undefined
+      ? `The value in Fibonacci sequence on position ${resultDto.resultPosition} has value ${resultDto.resultValue}.`
+      : "";
 
-  if (resultDto.resultValue !== undefined) {
-    return (
-      <p className="result-text">{`The value in Fibonacci sequence on position ${resultDto.resultPosition} has value ${resultDto.resultValue}`}</p>
-    );
-  }
-
-  return <></>;
+  return <p className="result-text">{text}</p>;
 }

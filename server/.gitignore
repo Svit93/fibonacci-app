@@ -4,6 +4,7 @@
 # production
 /build
 /index.js
+*.js
 
 # misc
 .DS_Store
