@@ -32,8 +32,6 @@ fastify.get<{
 });
 
 function validateInputAndGetError(position: number): string | undefined {
-  console.log("position", position);
-
   if (isNaN(position)) return "The input value is not valid.";
 
   if (position < 0)
