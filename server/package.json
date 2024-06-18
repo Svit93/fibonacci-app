@@ -1,0 +1,15 @@
+{
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "start": "tsc -p tsconfig.json && node index.js"
+  },
+  "type": "module",
+  "dependencies": {
+    "fastify": "^4.28.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.3",
+    "typescript": "^5.4.5",
+    "fastify-cli": "^6.2.1"
+  }
+}
