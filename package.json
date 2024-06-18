@@ -1,0 +1,11 @@
+{
+  "name": "fibonacci-app",
+  "scripts": {
+    "start": "npm install && concurrently \"npm run start:server\" \"npm run start:gui\"",
+    "start:server": "npm --prefix server run buildAndStart",
+    "start:gui": "npm --prefix gui run buildAndStart"
+  },
+  "devDependencies": {
+    "concurrently": "^7.0.0"
+  }
+}
